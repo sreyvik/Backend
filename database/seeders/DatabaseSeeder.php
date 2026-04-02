@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $adminEmail = 'chomnouy168@gmail.com';
+        $adminPassword = 'chomnouy168';
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
@@ -26,12 +29,12 @@ class DatabaseSeeder extends Seeder
         Role::firstOrCreate(['role_name' => 'Organization']);
         $adminRole = Role::firstOrCreate(['role_name' => 'Admin']);
 
-        User::firstOrCreate(
-            ['email' => 'chomnouy168@gmail.com'],
+        User::updateOrCreate(
+            ['email' => $adminEmail],
             [
                 'name' => 'Admin',
                 'phone' => null,
-                'password' => Hash::make('chomnouy168'),
+                'password' => Hash::make($adminPassword),
                 'status' => 'active',
                 'role_id' => $adminRole->id ?? $donorRole->id,
             ]
